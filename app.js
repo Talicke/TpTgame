@@ -37,5 +37,8 @@ Vue.createApp({
       const degat = Math.trunc((Math.random() * (20 - 10) + 10) * 1.5);
       this.vieAdversaire -= degat;
     },
+    abandonner() {
+      this.viePlayer = 0;
+    },
   },
 }).mount('#app');
