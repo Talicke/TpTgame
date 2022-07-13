@@ -26,86 +26,130 @@
         margin-left: auto;
       }
 
+      .gif-monster {
+        display: block;
+        margin-right: auto;
+      }
+
       .logs {
-        height: 10vh;
+        height: 30vh;
         overflow-y: scroll;
-        width: 75vw;
+        width: 100%;
         margin: auto;
         border: 2px solid white;
         font-size: 1.5em;
+        font-style: bold;
+      }
+
+      .btnAttkSpe {
+        background-image: url('./medias/BlackComplicatedBactrian-size_restricted.gif');
+        color: white;
+        transition: all 0.4s;
+        font-weight: bold;
+      }
+
+      .btnAttkSpe:hover {
+        color: white;
+        transform: scale(1.5);
       }
     </style>
   </head>
-  <body id="app" v-cloak>
-    <div class="card border-primary mx-auto my-3" style="max-width: 90rem">
-      <div class="card-header">Monstre</div>
-      <div class="card-body">
-        <img src="/medias/photofunky.gif" width="150" />
-        <div class="progress">
-          <div
-            class="progress-bar progress-bar-striped bg-danger"
-            role="progressbar"
-            :style="{width: vieAdversaire + '%'}"
-            aria-valuenow="100"
-            aria-valuemin="0"
-            aria-valuemax="100"
-          ></div>
+  <body id="app" v-cloak class="d-flex">
+    <div class="m-auto">
+      <div class="card border-primary mx-auto my-3" style="width: 50rem">
+        <div class="card-header">Monstre</div>
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <img src="/medias/photofunky.gif" width="150" class="gif-monster" />
+            <div class="m-auto">
+              <img :src="messAdversaire" style="width: 150px" />
+            </div>
+          </div>
+          <div class="progress">
+            <div
+              class="progress-bar progress-bar-striped bg-danger"
+              role="progressbar"
+              :style="{width: vieAdversaire + '%'}"
+              aria-valuenow="100"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card border-success m-auto" style="width: 50rem">
+        <div class="card-header">Vous</div>
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <div class="m-auto">
+              <img :src="messPlayer" style="width: 150px" />
+            </div>
+            <img src="/medias/GIF-Cat-et-unicorn.gif" width="150" />
+          </div>
+          <div class="progress">
+            <div
+              class="progress-bar progress-bar-striped bg-success"
+              role="progressbar"
+              :style="{width: viePlayer + '%'}"
+              aria-valuenow="100"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="card border-success m-auto" style="max-width: 90rem">
-      <div class="card-header">Vous</div>
-      <div class="card-body">
-        <img
-          src="/medias/GIF-Cat-et-unicorn.gif"
-          width="150"
-          class="gif-player"
-        />
-        <div class="progress">
-          <div
-            class="progress-bar progress-bar-striped bg-success"
-            role="progressbar"
-            :style="{width: viePlayer + '%'}"
-            aria-valuenow="100"
-            aria-valuemin="0"
-            aria-valuemax="100"
-          ></div>
-        </div>
+    <div class="mx-auto mt-3">
+      <div class="logs">
+        <ul>
+          <li v-for="log in logsArray">{{log}}</li>
+        </ul>
       </div>
-    </div>
-
-    <div v-if="viePlayer > 0 && vieAdversaire > 0">
-      <div class="text-center">
-        <button type="button" @click="attackPlayer" class="btn btn-primary m-3">
-          Attaque
-        </button>
-        <button type="button" @click="healPlayer" class="btn btn-success m-3">
-          Soin
-        </button>
-        <button type="button" @click="abandonner" class="btn btn-danger m-3">
-          Abandonner
-        </button>
-        <div>
+      <div v-if="viePlayer > 0 && vieAdversaire > 0">
+        <div :class="{hidden : btnDisplay}" class="text-center">
           <button
             type="button"
-            @click="attackSpe"
-            :class="{hidden : refreshAttack}"
-            class="btn btn-light m-3"
+            @click="attackPlayer"
+            class="btn btn-primary m-3"
           >
-            Attaque spéciale
+            Attaque
           </button>
+          <button type="button" @click="healPlayer" class="btn btn-success m-3">
+            Soin
+          </button>
+          <button type="button" @click="abandonner" class="btn btn-danger m-3">
+            Abandonner
+          </button>
+          <div>
+            <button
+              type="button"
+              @click="attackSpe"
+              :class="{hidden : refreshAttack}"
+              class="btn btnAttkSpe btn-light m-3"
+            >
+              Attaque spéciale
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-    <div v-else>
-      <h6 v-if="viePlayer == 0" class="card-title">GAME OVER</h6>
-      <h6 v-else="vieAdversaire == 0" class="card-title">YOU'RE WIN</h6>
-    </div>
-    <div class="logs">
-      <ul>
-        <li v-for="log in logsArray">{{log}}</li>
-      </ul>
+      <div v-else>
+        <div class="card mx-auto my-2">
+          <h3 v-if="viePlayer == 0" class="card-title" style="max-width: 50rem">
+            GAME OVER
+            <img src="./medias/gif-licorne-caca-glace.gif" />
+          </h3>
+          <h3
+            v-else="vieAdversaire == 0"
+            class="card mx-auto"
+            style="max-width: 50rem"
+          >
+            YOU WIN
+            <img src="./medias/licorne-qui-dab-gif.gif" />
+          </h3>
+        </div>
+      </div>
     </div>
     <script src="https://unpkg.com/vue@next"></script>
     <script src="app.js"></script>
