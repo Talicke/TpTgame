@@ -25,13 +25,22 @@
         display: block;
         margin-left: auto;
       }
+
+      .logs {
+        height: 10vh;
+        overflow-y: scroll;
+        width: 75vw;
+        margin: auto;
+        border: 2px solid white;
+        font-size: 1.5em;
+      }
     </style>
   </head>
   <body id="app" v-cloak>
     <div class="card border-primary mx-auto my-3" style="max-width: 90rem">
       <div class="card-header">Monstre</div>
       <div class="card-body">
-        <img src="/medias/photofunky.gif" width="200" />
+        <img src="/medias/photofunky.gif" width="150" />
         <div class="progress">
           <div
             class="progress-bar progress-bar-striped bg-danger"
@@ -50,7 +59,7 @@
       <div class="card-body">
         <img
           src="/medias/GIF-Cat-et-unicorn.gif"
-          width="200"
+          width="150"
           class="gif-player"
         />
         <div class="progress">
@@ -63,16 +72,21 @@
             aria-valuemax="100"
           ></div>
         </div>
-        <h6 v-if="viePlayer <= 0" class="card-title">GAME OVER</h6>
-        <h6 v-if="vieAdversaire <= 0" class="card-title">YOU'RE WIN</h6>
-        <div class="text-center">
-          <button
-            type="button"
-            @click="attackPlayer"
-            class="btn btn-primary m-3"
-          >
-            Attaque
-          </button>
+      </div>
+    </div>
+
+    <div v-if="viePlayer > 0 && vieAdversaire > 0">
+      <div class="text-center">
+        <button type="button" @click="attackPlayer" class="btn btn-primary m-3">
+          Attaque
+        </button>
+        <button type="button" @click="healPlayer" class="btn btn-success m-3">
+          Soin
+        </button>
+        <button type="button" @click="abandonner" class="btn btn-danger m-3">
+          Abandonner
+        </button>
+        <div>
           <button
             type="button"
             @click="attackSpe"
@@ -81,16 +95,18 @@
           >
             Attaque spéciale
           </button>
-          <button type="button" @click="heal" class="btn btn-success m-3">
-            Soin
-          </button>
-          <button type="button" @click="abandonner" class="btn btn-danger m-3">
-            Abandonner
-          </button>
         </div>
       </div>
     </div>
-
+    <div v-else>
+      <h6 v-if="viePlayer == 0" class="card-title">GAME OVER</h6>
+      <h6 v-else="vieAdversaire == 0" class="card-title">YOU'RE WIN</h6>
+    </div>
+    <div class="logs">
+      <ul>
+        <li v-for="log in logsArray">{{log}}</li>
+      </ul>
+    </div>
     <script src="https://unpkg.com/vue@next"></script>
     <script src="app.js"></script>
     <!-- Bootstrap JavaScript Libraries -->
