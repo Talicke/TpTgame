@@ -11,8 +11,7 @@ Vue.createApp({
       btnDisplay: false,
       messPlayer:
         'https://thumbs.gfycat.com/EarnestUnrealisticIrishsetter-size_restricted.gif',
-      messAdversaire:
-        'https://thumbs.gfycat.com/EarnestUnrealisticIrishsetter-size_restricted.gif',
+      messAdversaire: './medias/griffon-iddle.gif',
     };
   },
 
@@ -87,8 +86,7 @@ Vue.createApp({
           this.logsArray.unshift(log);
         }
         this.btnDisplay = false;
-        this.messAdversaire =
-          'https://thumbs.gfycat.com/EarnestUnrealisticIrishsetter-size_restricted.gif';
+        this.messAdversaire = './medias/griffon-iddle.gif';
         this.messPlayer =
           'https://thumbs.gfycat.com/EarnestUnrealisticIrishsetter-size_restricted.gif';
         this.countTours++;
@@ -113,8 +111,7 @@ Vue.createApp({
       this.messAdversaire = this.btnDisplay = false;
       const log = `le monstre se soigne et récupère ${soin} PDV`;
       this.logsArray.unshift(log);
-      this.messAdversaire =
-        'https://thumbs.gfycat.com/EarnestUnrealisticIrishsetter-size_restricted.gif';
+      this.messAdversaire = './medias/griffon-iddle.gif';
       this.messPlayer =
         'https://thumbs.gfycat.com/EarnestUnrealisticIrishsetter-size_restricted.gif';
       this.countTours++;
